@@ -8,6 +8,7 @@ public class Player {
 	 String playerId;
 	 String name;
 	 Boolean fittoplay;
+	 String manager;
 	 String dob;
 	 
 	public Boolean isfittoplay() {
@@ -35,6 +36,13 @@ public class Player {
 	}
 	public void setDob(String dob) {
 		this.dob = dob;
+	}
+	
+	public String getManager() {
+		return manager;
+	}
+	public void setManager(String dob) {
+		this.manager = manager;
 	}
 	public String getContactno() {
 		return contactno;

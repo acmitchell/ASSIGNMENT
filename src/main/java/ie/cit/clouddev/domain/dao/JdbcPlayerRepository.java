@@ -41,8 +41,8 @@ public class JdbcPlayerRepository implements PlayersRepository {
 
 	@Override
 	public void add(Player player) {
-		jdbcTemplate.update("INSERT INTO TODO VALUES(?,?,?,?)", 
-				player.getPlayerId(), player.getName(), getCurrentUser(), player.isfittoplay());
+		jdbcTemplate.update("INSERT INTO Players (playerid,name,manager) VALUES(?,?,?)", 
+				player.getPlayerId(), player.getName(), getCurrentUser());
 	}
 
 	private String getCurrentUser() {

@@ -26,8 +26,11 @@ public class TplayersServiceImplTest {
 	public void testnewplayer() {
 		Player newplayer = tested.newplayer("Test name");
 		Mockito.verify(playersRepository).add(newplayer);
-		Assert.assertThat(newplayer.getName(), CoreMatchers.equalTo("Test name2"));
+		Assert.assertThat(newplayer.getName(), CoreMatchers.equalTo("Test name"));
 	}
+	
+
+	
 
 }
 

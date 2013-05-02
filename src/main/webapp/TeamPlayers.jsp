@@ -21,23 +21,20 @@
 <h1 style="font-family:verdana;">Team Players Application </h1>
 <p style="font-family:arial;color:red;font-size:20px;">List of Players available on the Team </p> 
 
-<c:forTokens items=",Ann,Rosie,Tom, Tim" delims="," var="name">
-   <c:out value="${name}"/><p>
-</c:forTokens> 
 <br />
  
  
  
  
  <c:forEach items="${players}" var="player" varStatus="row">
-		 ${player.name } - ${player.fittoplay} 
+		 ${player.playerId } -${player.name } - ${player.manager} 
 		<form action="notfit.html" method="post">
 			<input name="playerID" value="${player.playerId}" type="hidden"> <input
-				type="submit" value="notFit">
+				type="submit" value="Not Fit to Play">
 		</form>
 		<form action="fit.html" method="post">
 			<input name="playerID" value="${player.playerId}" type="hidden"> <input
-				type="submit" value="fit">
+				type="submit" value="Fit to Play">
 		</form>
 	</c:forEach>
 	<form action="newplayer.html" method="post">
