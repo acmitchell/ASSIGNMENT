@@ -11,9 +11,10 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-
+@Secured("ROLE_USER")
 public class JdbcPlayerRepository implements PlayersRepository {
 
 	private JdbcTemplate jdbcTemplate;
@@ -40,8 +41,8 @@ public class JdbcPlayerRepository implements PlayersRepository {
 
 	@Override
 	public void add(Player player) {
-		jdbcTemplate.update("INSERT INTO TODO VALUES(?,?,?,?)", player.getPlayerId(),
-			player.getName(), getCurrentUser(), player.isfittoplay());
+		jdbcTemplate.update("INSERT INTO TODO VALUES(?,?,?,?)", 
+				player.getPlayerId(), player.getName(), getCurrentUser(), player.isfittoplay());
 	}
 
 	private String getCurrentUser() {
@@ -55,7 +56,7 @@ public class JdbcPlayerRepository implements PlayersRepository {
 
 	@Override
 	public void update(Player player) {
-		jdbcTemplate.update("UPDATE PLAYER SET NAME=?, FITTOPLAY=? WHERE PLAYERID=?",
+		jdbcTemplate.update("UPDATE PLAYERS SET NAME=?, FITTOPLAY=? WHERE PLAYERID=?",
 				player.getName(), player.isfittoplay(), player.getPlayerId());
 	}
 

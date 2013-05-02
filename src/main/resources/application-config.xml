@@ -40,7 +40,18 @@
 	</bean>
 
 
+	<security:http auto-config="true" />
+	<security:global-method-security
+		secured-annotations="enabled" />
 
+
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:password-encoder hash="md5" />
+			<security:user-service properties="classpath:users.properties" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
 	<beans profile="cloud">
 		<cloud:data-source id="dataSource" service-name="TPlayersDB" />
 	</beans>

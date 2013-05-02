@@ -14,7 +14,9 @@
 </head>
 <body   bgcolor="DDDDDD"  >
 	
-
+<a href="j_spring_security_logout">Logout: <security:authentication
+			property="principal.username" />
+</a>
 
 <h1 style="font-family:verdana;">Team Players Application </h1>
 <p style="font-family:arial;color:red;font-size:20px;">List of Players available on the Team </p> 

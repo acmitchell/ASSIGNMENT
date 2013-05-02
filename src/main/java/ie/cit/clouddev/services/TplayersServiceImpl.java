@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
+
 @Transactional
+
 public class TplayersServiceImpl implements TplayersService {
 	
 	private PlayersRepository repo;

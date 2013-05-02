@@ -1,11 +1,11 @@
 <html>
 <body>
 <head>
-<title>Team Players</title>
+<title>Team Players Login Screen</title>
 </head>
 <body   bgcolor="DDDDDD"  >
 
-<h1 style="font-family:verdana;">Team Players Application </h1>
-<p style="font-family:arial;color:red;font-size:20px;">List of Players available on the Team </p> 
+Login in here : <a href="index.html"> here </a>
+
 </body>
 </html>
