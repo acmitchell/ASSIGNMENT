@@ -10,7 +10,6 @@ public interface PlayersRepository {
 	
 	Player findPlayerId(String playerId);
 	
-	
 	void add(Player player);
 	
 	void delete(String playerId);
@@ -18,6 +17,9 @@ public interface PlayersRepository {
 	void update(Player player);
 
 	List<Player> getAllP();
+
+
+	List<Player> getAllfitP();
 	
 
 

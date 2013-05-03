@@ -12,35 +12,42 @@ public class InMemoryPlayerRepos implements PlayersRepository {
 
 		private Map<String, Player> data = new HashMap<String, Player>();
 
-		//@Override
-		public Player findplayerId(String playerId) {
+		@Override
+		public Player findPlayerId(String playerId) {
 			return data.get(playerId);
 		}
 
 		
-		//@Override
+		@Override
 		public List<Player> getAllP() {
 			return new ArrayList<Player>(data.values());
 		}
+		
+		@Override
+		public List<Player> getAllfitP() {
+			return new ArrayList<Player>(data.values());
+		}
 
-		//@Override
+		@Override
 		public void add(Player player) {
 			data.put(player.getPlayerId(), player);
 		}
 
-		//@Override
+		@Override
 		public void delete(String PlayerId) {
 			data.remove(PlayerId);
 		}
 
-		//@Override
+		@Override
 		public void update(Player player) {
 			data.put(player.getPlayerId(), player);
 		}
 
-		public Player findPlayerId(String playerId) {	
-			return data.get(playerId);
-		}
+
+		
+		
+
+		
 
 		
 

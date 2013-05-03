@@ -28,6 +28,13 @@ public class TPlayerRestController {     // list of players in jason
 	@Autowired
 	private TplayersService tplayersService;
 
+	@RequestMapping(value = "fitplayers", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public TPlayers fitplayers() {
+		return new TPlayers(tplayersService.getAllFitPlayers());	
+	}
+
 	
 	@RequestMapping(value = "player", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
@@ -51,9 +58,9 @@ public class TPlayerRestController {     // list of players in jason
 	@RequestMapping(value = "player", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public void create(@RequestParam String name, HttpServletRequest req,
+	public void create(@RequestParam String name,String contactno,String dob, HttpServletRequest req,
 			HttpServletResponse resp) {
-		Player player= tplayersService.newplayer(name);
+		Player player= tplayersService.newplayer(name,contactno,dob);
 		StringBuffer url = req.getRequestURL().append("/{playerId}");
 		UriTemplate uriTemplate = new UriTemplate(url.toString());
 		resp.addHeader("location", uriTemplate.expand(player.getPlayerId()).toASCIIString());
@@ -74,7 +81,7 @@ public class TPlayerRestController {     // list of players in jason
 	if (existing == null)
 		throw new NotFoundException();
 	existing.setName(player.getName());
-  //  existing.setFittoplay(player.setFittoplay());
+    existing.setFittoplay(player.isfittoplay());
 	}
 	
 	

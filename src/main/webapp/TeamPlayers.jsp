@@ -13,38 +13,80 @@
 <title>Team Players</title>
 </head>
 <body   bgcolor="DDDDDD"  >
+<h1 style="font-family:verdana;">Team Players Application </h1>
+
 	
 <a href="j_spring_security_logout">Logout: <security:authentication
 			property="principal.username" />
 </a>
 
-<h1 style="font-family:verdana;">Team Players Application </h1>
-<p style="font-family:arial;color:red;font-size:20px;">List of Players available on the Team </p> 
+<p style="font-family:arial;color:brown;font-size:20px;">Enter New Player Details </p>
+<form action="newplayer.html" method="post">
 
-<br />
+<table>
+	<tr>
+		<td> Name </td><td><input type="text" name="name"></td>
+		<td> Telephone </td><td><input type="text" name="contactno"></td>
+		<td> Date of Birth </td><td><input type="text" name="dob"></td>
+		<td><input type="submit" value="Create New Player"></td>
+	</tr>
+	
+</table>				
+</form>
+<p style="font-family:arial;color:red;font-size:20px;">Your Players Fit to Play </p>  
+ <table class="data" border =1>
+<tr>
+  	 <th>Name</th>
+</tr>
  
- 
- 
- 
- <c:forEach items="${players}" var="player" varStatus="row">
-		 ${player.playerId } -${player.name } - ${player.manager} 
-		<form action="notfit.html" method="post">
-			<input name="playerID" value="${player.playerId}" type="hidden"> <input
-				type="submit" value="Not Fit to Play">
-		</form>
-		<form action="fit.html" method="post">
-			<input name="playerID" value="${player.playerId}" type="hidden"> <input
-				type="submit" value="Fit to Play">
-		</form>
-	</c:forEach>
-	<form action="newplayer.html" method="post">
-		<input name="name"> <input type="submit" value="NewPlayer">
-	</form>
- 
+ <c:forEach items="${fitplayers}" var="player" varStatus="row">
+ 	<tr>
+        <td>${player.name } </td>
+  	</tr>
+</c:forEach>	
+</table>
+<br>
+<p style="font-family:arial;color:green;font-size:20px;">Your Players on the Team </p> 
 
- <br />
- 
-
+<table class="data" border =1>
+<tr>
+    <th> Player Name </th>
+    <th> Telephone </th>
+    <th> Date Of Birth </th>
+    <th>&nbsp;</th>
+</tr> 
+ <c:forEach items="${players}" var="player" varStatus="row"> 
+ <tr>
+        <td>   ${player.name   }</td>
+        <td>   ${player.contactno}</td>
+        <td>   ${player.dob      }</td>
+        
+        
+		<c:choose>
+			<c:when  test="${player.fittoplay }">     
+		         <td>
+		         <form action="notfit.html" method="post">
+					<input name="playerId" value="${player.playerId}" type="hidden"> <input
+						type="submit" value="Not Fit to Play">
+				 </form> </td>
+			</c:when>		
+			<c:otherwise>
+				<td><form action="fit.html" method="post">
+				<input name="playerId" value="${player.playerId}" type="hidden"> <input
+					type="submit" value="Fit to Play">			
+				</form> </td>
+			</c:otherwise>
+		</c:choose>
+		 <td>
+         <form action="delete.html" method="post">
+			<input name="playerId" value="${player.playerId}" type="hidden"> <input
+				type="submit" value="Delete Player">
+		</form> </td>
+</tr>
+ 	
+</c:forEach>
+	
+</table>
 
 
 </body>

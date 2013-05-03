@@ -7,22 +7,23 @@ import java.util.UUID;
 public class Player {
 	 String playerId;
 	 String name;
-	 Boolean fittoplay;
+	 boolean fittoplay;
 	 String manager;
 	 String dob;
-	 
-	public Boolean isfittoplay() {
+	 String contactno;
+		
+	public Player() {
+			setPlayerId(UUID.randomUUID().toString());
+	}
+	public boolean isfittoplay() {
 		return fittoplay;
 	}
 	
     public void setFittoplay(boolean fittoplay) {
         this.fittoplay = fittoplay;
     }
-	private String contactno;
 	
-	public Player() {
-		setPlayerId(UUID.randomUUID().toString());
-	}
+   
 
 
 	public String getName() {
@@ -41,7 +42,7 @@ public class Player {
 	public String getManager() {
 		return manager;
 	}
-	public void setManager(String dob) {
+	public void setManager(String manager) {
 		this.manager = manager;
 	}
 	public String getContactno() {

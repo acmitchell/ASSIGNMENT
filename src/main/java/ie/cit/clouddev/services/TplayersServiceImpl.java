@@ -24,19 +24,26 @@ public class TplayersServiceImpl implements TplayersService {
 		return repo.getAllP();
 	}
 	
+	public List<Player> getAllFitPlayers() {
+		return repo.getAllfitP();
+	}
+		
 	
-	
-	public Player newplayer(String name) {
+	public Player newplayer(String name, String contactno, String dob) {
 		Player player = new Player();
 		player.setName(name);
+		player.setContactno(contactno);
+		player.setDob(dob);
 		repo.add(player);
 		return player;
 	}
 	
+	
+	
 	public void fit(String playerId) {
 		Player player = repo.findPlayerId(playerId);
 		if ( player !=null) {
-				player.setFittoplay(false);
+				player.setFittoplay(true);
 				repo.update(player);
 		}
 	}
@@ -45,35 +52,13 @@ public class TplayersServiceImpl implements TplayersService {
 	public void notfit(String playerId) {
 		Player player = repo.findPlayerId(playerId);
 		if ( player !=null) {
-				player.setFittoplay(true);
+				player.setFittoplay(false);
 				repo.update(player);
 		}
 	}
-	/*
-	 * 
-	
-
-	
-
 	
 	
 	
-	 * public TplayerServiceImpl() {
-		Player player = new Player();
-		player.setName("Aine Mitchell");
-		player.setDob("01-Jan-2001");
-		player.setContactno("071 9183477");
-		players.add(player);
-	}*/
-
-	
-
-	
-	
-	
-	
-	
-
 	public Player get(String playerId) {
 		
 			return repo.findPlayerId(playerId);
@@ -83,6 +68,7 @@ public class TplayersServiceImpl implements TplayersService {
 	public void delete(String PlayerId) {
 		repo.delete(PlayerId);
 	}
+
 	
 	
 
