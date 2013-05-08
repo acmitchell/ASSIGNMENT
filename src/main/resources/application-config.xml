@@ -11,8 +11,8 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
-<bean id="PlayerRepository" class="ie.cit.clouddev.domain.dao.InMemoryPlayerRepos" />
-	
+	<bean id="PlayerRepository" class="ie.cit.clouddev.domain.dao.InMemoryPlayerRepos" />
+
 	<bean id="jdbcPlayerRepository" class="ie.cit.clouddev.domain.dao.JdbcPlayerRepository">
 		<constructor-arg ref="dataSource" />
 	</bean>
@@ -24,15 +24,15 @@
 	<bean class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
-		
+
+
 	<bean id="org.h2.tools.Server-WebServer" class="org.h2.tools.Server"
-			factory-method="createWebServer" init-method="start" lazy-init="false"
-			destroy-method="stop" depends-on="dataSource">
-			<constructor-arg value="-web,-webPort,8082" />
+		factory-method="createWebServer" init-method="start" lazy-init="false"
+		destroy-method="stop" depends-on="dataSource">
+		<constructor-arg value="-web,-webPort,8082" />
 	</bean>
-		
-		
+
+
 	<tx:annotation-driven />
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -51,7 +51,7 @@
 			<security:user-service properties="classpath:users.properties" />
 		</security:authentication-provider>
 	</security:authentication-manager>
-	
+
 	<beans profile="cloud">
 		<cloud:data-source id="dataSource" service-name="TPlayersDB" />
 	</beans>
@@ -66,7 +66,7 @@
 			<constructor-arg value="-web,-webPort,8082" />
 		</bean>
 	</beans>
-			
+
 
 </beans>
 	

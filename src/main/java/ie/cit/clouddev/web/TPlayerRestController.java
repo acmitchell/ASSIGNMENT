@@ -3,7 +3,6 @@ package ie.cit.clouddev.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 // import ie.cit.clouddev.web.NotFoundException;
 import ie.cit.clouddev.domain.Player;
 import ie.cit.clouddev.domain.TPlayers;
@@ -22,31 +21,32 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.util.UriTemplate;
 
 @Controller
-@RequestMapping("api")  // for all mappings
-public class TPlayerRestController {     // list of players in jason
-	
+@RequestMapping("api")
+// for all mappings
+public class TPlayerRestController { // list of players in jason
+
 	@Autowired
 	private TplayersService tplayersService;
 
+	// curl -X GET -i http://localhost:8080/tplayer/api/fitplayers
 	@RequestMapping(value = "fitplayers", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public TPlayers fitplayers() {
-		return new TPlayers(tplayersService.getAllFitPlayers());	
+		return new TPlayers(tplayersService.getAllFitPlayers());
 	}
-
-	
-	@RequestMapping(value = "player", method = RequestMethod.GET)
+	// curl -X GET -i http://localhost:8080/tplayer/api/players
+	@RequestMapping(value = "players", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public TPlayers players() {
-		return new TPlayers(tplayersService.getAllPlayers());	
+		return new TPlayers(tplayersService.getAllPlayers());
 	}
 
-		
+	// curl -X GET -i http://localhost:8080/tplayer/api/player/{playerId}
 	@RequestMapping(value = "player/{playerId}", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
-	@ResponseBody		
+	@ResponseBody
 	public Player player(@PathVariable String playerId) {
 		Player player = tplayersService.get(playerId);
 		if (player == null)
@@ -54,48 +54,41 @@ public class TPlayerRestController {     // list of players in jason
 		return player;
 	}
 
-			
+	// curl -X POST -i http://localhost:8080/tplayer/api/player/ ?name=Tomas ?contactno=087666666 ?dob=1/4/2000
 	@RequestMapping(value = "player", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public void create(@RequestParam String name,String contactno,String dob, HttpServletRequest req,
-			HttpServletResponse resp) {
-		Player player= tplayersService.newplayer(name,contactno,dob);
+	public void create(@RequestParam String name, String contactno, String dob,
+			HttpServletRequest req, HttpServletResponse resp) {
+		Player player = tplayersService.newplayer(name, contactno, dob);
 		StringBuffer url = req.getRequestURL().append("/{playerId}");
 		UriTemplate uriTemplate = new UriTemplate(url.toString());
-		resp.addHeader("location", uriTemplate.expand(player.getPlayerId()).toASCIIString());
+		resp.addHeader("location", uriTemplate.expand(player.getPlayerId())
+				.toASCIIString());
 	}
 
-	
+	// curl -X DELETE -i http://localhost:8080/tplayer/api/player/{playId}
 	@RequestMapping(value = "player/{playerId}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable String playerId) {
 		tplayersService.delete(playerId);
 	}
 
-			
+	// curl -X PUT -i http://localhost:8080/tplayer/api/player/{id} -d
+		// '{"name":"Thomas","fittoplay":true}'
 	@RequestMapping(value = "player/{playerId}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void update(@PathVariable String playerId, @RequestBody Player player) {
-	Player existing = tplayersService.get(playerId);
-	if (existing == null)
-		throw new NotFoundException();
-	existing.setName(player.getName());
-    existing.setFittoplay(player.isfittoplay());
+		Player existing = tplayersService.get(playerId);
+		if (existing == null)
+			throw new NotFoundException();
+		existing.setName(player.getName());
+		existing.setFittoplay(player.isfittoplay());
 	}
-	
-	
 
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	class NotFoundException extends RuntimeException {
-			private static final long serialVersionUID = 1L;
+		private static final long serialVersionUID = 1L;
 	}
-		
-			
-	}
-	
-	
-	
-		
-	
 
+}

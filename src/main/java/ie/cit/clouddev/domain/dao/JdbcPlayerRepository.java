@@ -1,6 +1,5 @@
 package ie.cit.clouddev.domain.dao;
 
-
 import ie.cit.clouddev.domain.Player;
 
 import java.sql.ResultSet;
@@ -24,31 +23,35 @@ public class JdbcPlayerRepository implements PlayersRepository {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	
-	
 	@Override
 	public Player findPlayerId(String playerId) {
-		return jdbcTemplate.queryForObject(
-				"SELECT PLAYERID, NAME, FITTOPLAY,CONTACTNO,DOB FROM PLAYERS WHERE PLAYERID=?", playerMapper, playerId);
+		return jdbcTemplate
+				.queryForObject(
+						"SELECT PLAYERID, NAME, FITTOPLAY,CONTACTNO,DOB FROM PLAYERS WHERE PLAYERID=?",
+						playerMapper, playerId);
 	}
 
 	@Override
 	public List<Player> getAllP() {
-		return jdbcTemplate.query(
-				"SELECT PLAYERID, NAME, FITTOPLAY,CONTACTNO,DOB FROM PLAYERS WHERE MANAGER=?", playerMapper,
-				getCurrentUser());
+		return jdbcTemplate
+				.query("SELECT PLAYERID, NAME, FITTOPLAY,CONTACTNO,DOB FROM PLAYERS WHERE MANAGER=?",
+						playerMapper, getCurrentUser());
 	}
+
 	@Override
 	public List<Player> getAllfitP() {
-		return jdbcTemplate.query(
-				"SELECT PLAYERID, NAME, FITTOPLAY,CONTACTNO,DOB FROM PLAYERS WHERE MANAGER=? AND FITTOPLAY=?", playerMapper,
-				getCurrentUser(),"true");
+		return jdbcTemplate
+				.query("SELECT PLAYERID, NAME, FITTOPLAY,CONTACTNO,DOB FROM PLAYERS WHERE MANAGER=? AND FITTOPLAY=?",
+						playerMapper, getCurrentUser(), "true");
 	}
 
 	@Override
 	public void add(Player player) {
-		jdbcTemplate.update("INSERT INTO Players (playerid,name,manager,contactno,dob) VALUES(?,?,?,?,?)", 
-				player.getPlayerId(), player.getName(), getCurrentUser(),player.getContactno(),player.getDob());
+		jdbcTemplate
+				.update("INSERT INTO Players (playerid,name,manager,contactno,dob) VALUES(?,?,?,?,?)",
+						player.getPlayerId(), player.getName(),
+						getCurrentUser(), player.getContactno(),
+						player.getDob());
 	}
 
 	private String getCurrentUser() {
@@ -62,15 +65,15 @@ public class JdbcPlayerRepository implements PlayersRepository {
 
 	@Override
 	public void update(Player player) {
-		jdbcTemplate.update("UPDATE PLAYERS SET NAME=?, FITTOPLAY=? WHERE PLAYERID=?",
+		jdbcTemplate.update(
+				"UPDATE PLAYERS SET NAME=?, FITTOPLAY=? WHERE PLAYERID=?",
 				player.getName(), player.isfittoplay(), player.getPlayerId());
 	}
-	
-	
+
 }
 
 class PlayerMapper implements RowMapper<Player> {
-	//@Override
+	 @Override
 	public Player mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Player player = new Player();
 		player.setPlayerId(rs.getString("playerId"));

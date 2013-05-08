@@ -9,9 +9,9 @@ public interface TplayersService {
 
 	List<Player> getAllPlayers();
 
-	Player newplayer(String name,String contactno,String dob);
+	Player newplayer(String name, String contactno, String dob);
 
- 	void delete(String playerId);
+	void delete(String playerId);
 
 	void fit(String playerId);
 
@@ -20,8 +20,5 @@ public interface TplayersService {
 	void notfit(String playerId);
 
 	List<Player> getAllFitPlayers();
-
-	
-	
 
 }
