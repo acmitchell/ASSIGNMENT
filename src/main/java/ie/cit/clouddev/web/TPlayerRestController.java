@@ -28,14 +28,14 @@ public class TPlayerRestController { // list of players in jason
 	@Autowired
 	private TplayersService tplayersService;
 
-	// curl -X GET -i http://localhost:8080/tplayer/api/fitplayers
+	// curl -u cat:clever -X GET -i http://tplayers/cloudfoundry.comfitplayers
 	@RequestMapping(value = "fitplayers", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public TPlayers fitplayers() {
 		return new TPlayers(tplayersService.getAllFitPlayers());
 	}
-	// curl -X GET -i http://localhost:8080/tplayer/api/players
+	// curl -u cat:clever -X GET -i http://tplayers/cloudfoundry.com/players
 	@RequestMapping(value = "players", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
@@ -43,7 +43,7 @@ public class TPlayerRestController { // list of players in jason
 		return new TPlayers(tplayersService.getAllPlayers());
 	}
 
-	// curl -X GET -i http://localhost:8080/tplayer/api/player/{playerId}
+	// curl -u cat:clever -X GET -i http://tplayers/cloudfoundry.com/player/{playerId}
 	@RequestMapping(value = "player/{playerId}", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
@@ -54,7 +54,7 @@ public class TPlayerRestController { // list of players in jason
 		return player;
 	}
 
-	// curl -X POST -i http://localhost:8080/tplayer/api/player/ ?name=Tomas ?contactno=087666666 ?dob=1/4/2000
+	// curl -u cat:clever -X POST -i http://tplayers/cloudfoundry.com/player/ ?name=Tomas ?contactno=087666666 ?dob=1/4/2000
 	@RequestMapping(value = "player", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
@@ -67,14 +67,14 @@ public class TPlayerRestController { // list of players in jason
 				.toASCIIString());
 	}
 
-	// curl -X DELETE -i http://localhost:8080/tplayer/api/player/{playId}
+	// curl -X DELETE -i http://tplayers/cloudfoundry.com/player/{playId}
 	@RequestMapping(value = "player/{playerId}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable String playerId) {
 		tplayersService.delete(playerId);
 	}
 
-	// curl -X PUT -i http://localhost:8080/tplayer/api/player/{id} -d
+	// curl -X PUT -i http://tplayer/cloudfoundry.com/player/{id} -d
 		// '{"name":"Thomas","fittoplay":true}'
 	@RequestMapping(value = "player/{playerId}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
