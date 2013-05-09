@@ -67,14 +67,14 @@ public class TPlayerRestController { // list of players in jason
 				.toASCIIString());
 	}
 
-	// curl -X DELETE -i http://tplayers/cloudfoundry.com/player/{playId}
+	// curl -u cat:clever-X DELETE -i http://tplayers/cloudfoundry.com/player/{playId}
 	@RequestMapping(value = "player/{playerId}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable String playerId) {
 		tplayersService.delete(playerId);
 	}
 
-	// curl -X PUT -i http://tplayer/cloudfoundry.com/player/{id} -d
+	// curl -u cat:clever -X PUT -i http://tplayer/cloudfoundry.com/player/{id} -d
 		// '{"name":"Thomas","fittoplay":true}'
 	@RequestMapping(value = "player/{playerId}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
